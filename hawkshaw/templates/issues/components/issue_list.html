@@ -1,0 +1,32 @@
+<div class='container'>
+    {% if issues %}
+    <div>Total issues : {{ issues.count }}</div>
+    {% for issue in issues %}
+    <div class='row'>
+       <div class='col col-9'> {{ issue.title }} </div>
+       <div class='col col-1 text-center'><i class="fa-solid fa-pencil text-warning"
+            data-bs-toggle="modal" data-bs-target="#static_modal" style="cursor:pointer"
+            hx-trigger='click'
+            hx-get="{% url 'issues:issue-update' issue.id %}"
+            hx-target='#modal-swap'
+            ></i></div>
+        <div class='col col-1'><i class="fa-solid fa-eye text-info"
+            data-bs-toggle="modal" data-bs-target="#static_modal" style="cursor:pointer"
+            hx-trigger='click'
+            hx-get="{% url 'issues:issue-detail' issue.id %}"
+            hx-target='#modal-swap'
+            ></i></div>
+       <div class='col col-1'><i class="fa-solid fa-trash-can text-danger"
+            data-bs-toggle="modal" data-bs-target="#static_modal" style="cursor:pointer"
+            hx-trigger='click'
+            hx-get="{% url 'issues:issue-delete' issue.id %}"
+            hx-target='#modal-swap'
+            ></i></div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class='row'>
+        <small>No Issues Found</small>
+    </div>
+    {% endif %}
+</div>
