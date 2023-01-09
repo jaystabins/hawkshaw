@@ -1,19 +1,24 @@
-{% extends "account/base.html" %}
+  {% load i18n %}
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" id="staticBackdropLabel">Logout {{ user.username }}'s Profile</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+<form method="post" action="{% url 'account_logout' %}">
+    <div class="modal-body">
 
-{% load i18n %}
-
-{% block head_title %}{% translate "Sign Out" %}{% endblock %}
-
-{% block inner %}
 <h1>{% translate "Sign Out" %}</h1>
 
 <p>{% translate 'Are you sure you want to sign out?' %}</p>
 
-<form method="post" action="{% url 'account_logout' %}">
   {% csrf_token %}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
   {% endif %}
-  <button class="btn btn-danger" type="submit">{% translate 'Sign Out' %}</button>
-</form>
-{% endblock %}
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-danger" type="submit">{% translate 'Sign Out' %}</button>
+    </div>
+  </form>
+</div>

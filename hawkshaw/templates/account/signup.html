@@ -1,22 +1,69 @@
-{% extends "account/base.html" %}
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} Sign UP {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
 
 {% load i18n %}
+{% load account socialaccount %}
 {% load crispy_forms_tags %}
+{% load static i18n %}
 
-{% block head_title %}{% translate "Signup" %}{% endblock %}
+    <main>
+        <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center form-bg-image" data-background-lg="{% static '/img/illustrations/signin.svg' %}">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <h1 class="mb-0 h3">
+                                    Hawskhaw  - Sign UP
+                                </h1>
+                                <br />
+                                <p>
+                                    {% if msg %}
+                                        {{ msg | safe }}
+                                    {% else %}
+                                        Add your credentials
+                                    {% endif %}                                     
+                                </p> 
+                            </div>
 
-{% block inner %}
-<h1>{% translate "Sign Up" %}</h1>
+                            {% if success %}
+                                <div class="d-grid">
+                                    <a href="{% url 'login' %}" class="btn btn-gray-800">Sign IN</a>
+                                </div>
+                            {% else %}
+                                    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                                        {% csrf_token %}
+                                        {{ form|crispy }}
+                                    {% if redirect_field_value %}
+                                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                    {% endif %}                                    <div class="d-grid">
+                                        <button type="submit" name="register" class="btn btn-gray-800">{% translate "Sign Up" %}</button>
+                                    </div>
+                                </form>
+                                <br />
+                                <div class="d-flex justify-content-center align-items-center mt-4">
+                                    <span class="fw-normal">
+                                        Already have an account? 
+                                        <a href="{{ login_url }}" class="fw-bold">Sign IN</a>
+                                    </span>
+                                </div>
 
-<p>{% blocktranslate %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktranslate %}</p>
+                            {% endif %}
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button class="btn btn-primary" type="submit">{% translate "Sign Up" %} &raquo;</button>
-</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-{% endblock %}
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

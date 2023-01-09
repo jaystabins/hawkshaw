@@ -1,0 +1,12 @@
+<div id="user-dropdown-swap" class="media d-flex align-items-center">
+    <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
+    <span class="mb-0 font-small fw-bold text-gray-900">
+        Hi <strong>{{ request.user.name|default:request.user.username|title }}</strong> &nbsp; 
+    </span>
+    </div>
+    <img class="avatar rounded-circle" alt="avatar" src="{{avatar.url}}"
+        hx-get="{% url 'users:get-profile-image' %}"
+        hx-swap="outerHTML"
+        hx-trigger="profile_updated from:body"
+        hx-target="#user-dropdown-swap">
+</div>

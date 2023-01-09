@@ -1,4 +1,4 @@
-{% extends "account/base.html" %}
+{% extends "layouts/base-fullscreen.html" %}
 
 {% load i18n %}
 {% load account %}
@@ -6,7 +6,10 @@
 {% block head_title %}{% translate "Confirm E-mail Address" %}{% endblock %}
 
 
-{% block inner %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6 offset-md-3 mh-100vh">
+    <div class="bg-white p-3 rounded mt-5">
 <h1>{% translate "Confirm E-mail Address" %}</h1>
 
 {% if confirmation %}
@@ -28,4 +31,7 @@
 
 {% endif %}
 
+    </div>
+  </div>
+</div>
 {% endblock %}

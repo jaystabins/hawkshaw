@@ -1,37 +1,52 @@
 {% extends "users/base.html" %}
 {% load static %}
-
-{% block title %}User: {{ object.username }}{% endblock %}
+{% load humanize %}
 
 {% block inner %}
-<div class="container">
-
-  <div class="row">
-    <div class="col-sm-12">
-
-      <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
-      {% endif %}
+<div class="row">
+  <div class="col-12 col-xl-4">
+    <div class="row">
+        <div class="col-12 mb-4" id='profile-card'
+              hx-get="{% url 'users:get-profile-card' object.username %}"
+              hx-trigger='load, profile_updated from:body'
+              >
+            <!-- HTMX Profile Body -->
+        </div>
     </div>
   </div>
+  <!-- User Buttons ect -->
+  <div class="col-12 col-xl-4">
 
-{% if object == request.user %}
-<!-- Action buttons -->
-<div class="row">
 
-  <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
-  </div>
+  {% if object == request.user %}
+  <!-- Action buttons -->
+    <div class="col-sm-12">
+    <h4>Update Profile Info</h4>
+      <button type="button" id="user-update-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#static_modal"
+          hx-get="{% url 'users:update' %}" 
+          hx-trigger="click"
+          hx-target="#modal-swap"
+          >My Info
+      </button>
+      <button type="button"  id="user-update-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#static_modal" 
+          hx-get="{% url 'account_email' %}"
+          hx-trigger="click"
+          hx-target="#modal-swap"
+          >E-Mail
+      </button>
+      <button type="button"  id="user-update-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#static_modal" 
+          hx-get="{% url 'users:photo-upload' %}"
+          hx-trigger="click"
+          hx-target="#modal-swap"
+          >Pictures
+      </button>
+      <!-- Your Stuff: Custom user template urls -->
+    </div>
 
-</div>
-<!-- End Action buttons -->
-<h3>User Social Account Providers</h3>
-{{request.user.socialaccount.extra_data}}
+
+  <!-- End Action buttons -->
 
 {% endif %}
-
+</div>
 </div>
 {% endblock inner %}
