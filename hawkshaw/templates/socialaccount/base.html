@@ -1,1 +1,10 @@
-{% extends "account/base.html" %}
+{% extends "layouts/base-fullscreen.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6 offset-md-3 mh-100vh">
+    <div class="bg-white p-3 rounded mt-5">
+    {% block inner %}{% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

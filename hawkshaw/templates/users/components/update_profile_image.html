@@ -1,0 +1,16 @@
+{% load crispy_forms_tags %}
+
+<div class="modal-header">
+    <h1 class="modal-title fs-5" id="staticBackdropLabel">Update your Images</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <form hx-post='{% url "users:photo-upload" %}' enctype="multipart/form-data">
+    <div class="modal-body">
+        {{ form|crispy }}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss='modal'>Upload</button>
+    </div>
+  </form>
+</div>

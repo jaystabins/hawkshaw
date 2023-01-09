@@ -9,7 +9,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path(
         "",
-        login_required(TemplateView.as_view(template_name="pages/home.html")),
+        login_required(TemplateView.as_view(template_name="pages/dashboard.html")),
         name="home",
     ),
     path(

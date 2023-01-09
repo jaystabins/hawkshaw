@@ -21,6 +21,13 @@ class User(AbstractUser):
     name = CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
+    bio = models.TextField(blank=True)
+    company = models.CharField(_("Company I Work For"), blank=True, max_length=255)
+    location = models.CharField(_("Location"), blank=True, max_length=255)
+    show_primary_email = models.BooleanField(default=False)
+    website = models.URLField(blank=True)
+    avatar = models.ImageField(blank=True, upload_to='avatar_images')
+    cover_img = models.ImageField(blank=True, upload_to='cover_images')
 
     def get_absolute_url(self):
         """Get url for user's detail view.

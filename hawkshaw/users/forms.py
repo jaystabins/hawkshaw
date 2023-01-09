@@ -3,6 +3,7 @@ from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django.contrib.auth import forms as admin_forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django.forms import ModelForm
 
 User = get_user_model()
 
@@ -40,3 +41,8 @@ class UserSocialSignupForm(SocialSignupForm):
     Default fields will be added automatically.
     See UserSignupForm otherwise.
     """
+
+class UserUploadImageForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ('avatar', 'cover_img')
