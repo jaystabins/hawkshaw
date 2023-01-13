@@ -8,21 +8,59 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Issue',
+            name="Issue",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=100)),
-                ('description', models.TextField()),
-                ('priority', models.IntegerField(choices=[(1, 'Trivial'), (2, 'Minor'), (3, 'Major'), (4, 'Critical'), (5, 'Blocker')])),
-                ('type', models.IntegerField(choices=[(1, 'Bug'), (2, 'Enhancement'), (3, 'Request'), (4, 'Task')])),
-                ('status', models.IntegerField(choices=[(1, 'Open'), (2, 'Development'), (3, 'QA'), (4, 'Closed')])),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("description", models.TextField()),
+                (
+                    "priority",
+                    models.IntegerField(
+                        choices=[
+                            (1, "Trivial"),
+                            (2, "Minor"),
+                            (3, "Major"),
+                            (4, "Critical"),
+                            (5, "Blocker"),
+                        ]
+                    ),
+                ),
+                (
+                    "type",
+                    models.IntegerField(
+                        choices=[
+                            (1, "Bug"),
+                            (2, "Enhancement"),
+                            (3, "Request"),
+                            (4, "Task"),
+                        ]
+                    ),
+                ),
+                (
+                    "status",
+                    models.IntegerField(
+                        choices=[
+                            (1, "Open"),
+                            (2, "Development"),
+                            (3, "QA"),
+                            (4, "Closed"),
+                        ]
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
         ),
     ]

@@ -1,12 +1,12 @@
 from django.urls import path
 
 from hawkshaw.users.views import (
-    user_detail_view,
-    user_redirect_view,
-    user_update_view,
-    user_update_image_view,
     get_profile,
     get_profile_image,
+    user_detail_view,
+    user_redirect_view,
+    user_update_image_view,
+    user_update_view,
 )
 
 app_name = "users"

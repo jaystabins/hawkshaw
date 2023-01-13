@@ -1,17 +1,17 @@
-from django.shortcuts import render
-from projects.models import Project
-from projects.forms import ProjectForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from hawkshaw.utils.helpers import htmx_message_response
-from issues.models import Issue
+from django.shortcuts import render
 from django.views.generic import (
     CreateView,
     DeleteView,
     DetailView,
     ListView,
     UpdateView,
-    DeleteView,
 )
+from issues.models import Issue
+from projects.forms import ProjectForm
+from projects.models import Project
+
+from hawkshaw.utils.helpers import htmx_message_response
 
 
 def project_dashboard(request):

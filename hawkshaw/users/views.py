@@ -1,13 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
-from django.http import HttpResponse
-import json
-from django.shortcuts import render
 from users.forms import UserUploadImageForm
+
 from hawkshaw.utils.helpers import htmx_message_response
 
 User = get_user_model()
