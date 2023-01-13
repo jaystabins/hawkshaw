@@ -34,9 +34,9 @@
       {% endfor %}
 
     <div class="form-group">
-          <button class="secondaryAction btn btn-primary" type="submit" name="action_primary" data-bs-dismiss="modal">{% translate 'Make Primary' %}</button>
-          <button class="secondaryAction btn btn-primary" type="submit" name="action_send" data-bs-dismiss="modal">{% translate 'Re-send Verification' %}</button>
-          <button class="primaryAction btn btn-primary" type="submit" name="action_remove" data-bs-dismiss="modal">{% translate 'Remove' %}</button>
+          <button class="secondaryAction btn btn-primary" type="submit" name="action_primary">{% translate 'Make Primary' %}</button>
+          <button class="secondaryAction btn btn-primary" type="submit" name="action_send">{% translate 'Re-send Verification' %}</button>
+          <button class="primaryAction btn btn-primary" type="submit" name="action_remove">{% translate 'Remove' %}</button>
     </div>
 
     </fieldset>
@@ -53,7 +53,7 @@
     <form id="add-email-form" hx-post="{% url 'account_email' %}" hx-target="#modal-swap" class="add_email">
         {% csrf_token %}
         {{ form|crispy }}
-        <button class="btn btn-primary" name="action_add" type="submit" data-bs-dismiss="modal">{% translate "Add E-mail" %}</button>
+        <button class="btn btn-primary" name="action_add" type="submit">{% translate "Add E-mail" %}</button>
     </form>
     <!-- Modal Footer -->
     </div>

@@ -1,0 +1,92 @@
+<div class="card card-body border-0 shadow table-wrapper table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                {% comment %} <th class="border-gray-200">#</th> {% endcomment %}
+                <th class="border-gray-200">Issue Title</th>						
+                {% comment %} <th class="border-gray-200">Description</th> {% endcomment %}
+                <th class="border-gray-200">Priority</th>
+                <th class="border-gray-200">Type</th>
+                <th class="border-gray-200">Status</th>
+                <th class="border-gray-200">Created</th>
+                <th class="border-gray-200">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Item -->
+            {% for issue in issues %}
+            
+            <tr>
+                {% comment %} <td>
+                    <a href="{% url 'issues:issue-detail' issue.id %}" class="fw-bold">
+                        {{ issue.id|truncatechars:8 }}
+                    </a>
+                </td> {% endcomment %}
+                <td><a href="{% url 'issues:issue-detail' issue.id %}" class="fw-bold">{{ issue.title }}</a></td>                       
+                {% comment %} <td><span class="fw-normal">{{ issue.description|truncatechars:50 }}</span></td> {% endcomment %}
+                <td><span class="fw-normal">{{ issue.get_priority_display }}</span></td>
+                <td><span class="fw-normal">{{ issue.get_type_display }}</span></td>
+                <td><span class="fw-normal">{{ issue.get_status_display }}</span></td>
+                <td><span class="fw-normal">{{ issue.created_at|date:"D d M Y" }}</span></td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="icon icon-sm">
+                                <span class="fas fa-ellipsis-h icon-dark"></span>
+                            </span>
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu py-0" id="table-dropdown">
+                            <a class="dropdown-item rounded-top" data-bs-target="#static_modal" data-bs-toggle="modal"
+                                hx-get="{% url 'issues:issue-detail' issue.id %}"
+                                hx-target="#modal-swap"
+                                hx-trigger="click"
+                                ><span class="fas fa-eye me-2"></span>View Details</a>
+                            <a class="dropdown-item" data-bs-target="#static_modal" data-bs-toggle="modal"
+                                hx-get="{% url 'issues:issue-update' issue.id %}"
+                                hx-target="#modal-swap"
+                                hx-trigger="click"
+                                ><span class="fas fa-edit me-2"></span>Edit</a>
+                            <a class="dropdown-item text-danger rounded-bottom" data-bs-target="#static_modal" data-bs-toggle="modal"
+                                 hx-get="{% url 'issues:issue-delete' issue.id %}"
+                                 hx-target="#modal-swap"
+                                 hx-trigger="click"
+                                 ><span class="fas fa-trash-alt me-2"></span>Remove</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}                             
+        </tbody>
+    </table>
+    {% if pagenation %}
+    <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination mb-0">
+                <li class="page-item">
+                    <a class="page-link" href="#">Previous</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">4</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">5</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="fw-normal small mt-4 mt-lg-0">Showing <b>5</b> out of <b>25</b> entries</div>
+    </div>
+    {% endif %}
+</div>

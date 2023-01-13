@@ -2,7 +2,6 @@ import uuid
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.db.models import CharField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -18,7 +17,7 @@ class User(AbstractUser):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
 
     #: First and last name do not cover name patterns around the globe
-    name = CharField(_("Name of User"), blank=True, max_length=255)
+    name = models.CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
     bio = models.TextField(blank=True)
@@ -26,8 +25,8 @@ class User(AbstractUser):
     location = models.CharField(_("Location"), blank=True, max_length=255)
     show_primary_email = models.BooleanField(default=False)
     website = models.URLField(blank=True)
-    avatar = models.ImageField(blank=True, upload_to='avatar_images')
-    cover_img = models.ImageField(blank=True, upload_to='cover_images')
+    avatar = models.ImageField(blank=True, upload_to="avatar_images")
+    cover_img = models.ImageField(blank=True, upload_to="cover_images")
 
     def get_absolute_url(self):
         """Get url for user's detail view.

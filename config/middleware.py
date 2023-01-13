@@ -44,5 +44,5 @@ class HtmxMessageMiddleware(MiddlewareMixin):
 
         # HTMX does not display trigger on non-2XX status_code's
         # This is very very bad
-        response.status_code = 200
+        response.status_code = 204
         return response

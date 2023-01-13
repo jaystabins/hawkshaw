@@ -2,9 +2,10 @@
     <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Confirmation</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
-  <form hx-delete='{% url "issues:issue-delete" issue.id %}'>
+  <form hx-delete='{% url "projects:project-delete" project.id %}'>
     <div class="modal-body">
         Are you sure you would like to permenantly delete this?
+        <div class="text-danger h3">You cannot recover this action!</div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

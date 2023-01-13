@@ -42,7 +42,12 @@ class UserSocialSignupForm(SocialSignupForm):
     See UserSignupForm otherwise.
     """
 
+
 class UserUploadImageForm(ModelForm):
+    """
+    Form the user sees when uploading a new profile or cover image form.
+    """
+
     class Meta:
         model = User
-        fields = ('avatar', 'cover_img')
+        fields = ("avatar", "cover_img")
