@@ -3,6 +3,7 @@ import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+from projects.models import Project
 
 User = get_user_model()
 
@@ -36,6 +37,9 @@ class Issue(models.Model):
     priority = models.IntegerField(choices=PRIORITY_CHOICES)
     type = models.IntegerField(choices=TYPE_CHOICES)
     status = models.IntegerField(choices=STATUS_CHOICES)
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="issues"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

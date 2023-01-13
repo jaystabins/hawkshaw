@@ -7,7 +7,7 @@
 <!-- Primary Meta Tags -->
 
 <title>
-    Hawkshaw Bug Tracker - {% block title %}{% endblock %}
+    Hawkshaw Bug Tracker - {% block title %}Dashboard{% endblock %}
 </title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,15 +19,15 @@
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://demo.themesberg.com/volt-pro">
-<meta property="og:title" content="Hawkshaw Bug Tracker - Sign up page">
+<meta property="og:url" content="https://hawkshaw.jaystabins.com">
+<meta property="og:title" content="Hawkshaw Bug Tracker - Dashboard">
 <meta property="og:description" content="Hawkshaw Bug Tracker.">
 <meta property="og:image" content="">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://demo.themesberg.com/volt-pro">
-<meta property="twitter:title" content="Volt Free Bootstrap Dashboard - Sign up page">
+<meta property="twitter:url" content="https://hawkshaw.jaystabins.com">
+<meta property="twitter:title" content="Hawkshaw Bug Tracker - Dashboard">
 <meta property="twitter:description" content="Hawkshaw Bug Tracker.">
 <meta property="twitter:image" content="">
 
@@ -44,9 +44,6 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<link type="text/css" href="{% static '/vendor/sweetalert2/dist/sweetalert2.min.css' %}" rel="stylesheet">
-
-<link type="text/css" href="{% static '/vendor/notyf/notyf.min.css' %}" rel="stylesheet">
 <link type="text/css" href="{% static '/css/volt.css' %}" rel="stylesheet">
 <link type="text/css" href="{% static '/css/project.css' %}" rel="stylesheet">
 
@@ -91,6 +88,17 @@
   {% block javascripts %}{% endblock javascripts %}  
 
   <script>
+        document.addEventListener('htmx:afterRequest', function(event) {
+          var trigger = event.detail.xhr.getResponseHeader('HX-Trigger');
+          if (typeof trigger === 'string') {
+            trigger = JSON.parse(trigger);
+          }
+          if (trigger && trigger.hasOwnProperty("close_modal")){
+            var myModalEl = document.getElementById('static_modal');
+            var modal = bootstrap.Modal.getInstance(myModalEl);
+            modal.hide();
+          }
+        });
   </script>
       
 </body>

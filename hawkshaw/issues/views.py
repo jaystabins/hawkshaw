@@ -9,17 +9,19 @@ from django.views.generic import (
 )
 from issues.forms import IssueForm
 from issues.models import Issue
+from projects.models import Project
+from hawkshaw.utils.helpers import htmx_message_response
 
 
 class IssueListView(LoginRequiredMixin, ListView):
-    template_name = "issues/components/issue_list.html"
+    template_name = "issues/components/issue_table.html"
     context_object_name = "issues"
 
     class Meta:
         model = Issue
 
     def get_queryset(self):
-        return Issue.objects.filter(user=self.request.user)
+        return Issue.objects.filter(project_id=self.kwargs.get("projectPK"))
 
 
 class IssueDetailView(LoginRequiredMixin, DetailView):
@@ -44,9 +46,13 @@ class IssueUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         form.save()
-        response = HttpResponse()
-        response["HX-Trigger"] = "issue_list_updated"
-        return response
+        return htmx_message_response(
+            204,
+            f"{form.cleaned_data.get('title')} Has Been Updated",
+            "success",
+            issue_list_updated=None,
+            close_modal=None,
+        )
 
 
 class IssueDeleteView(LoginRequiredMixin, DeleteView):
@@ -60,9 +66,13 @@ class IssueDeleteView(LoginRequiredMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         self.get_object().delete()
-        response = HttpResponse()
-        response["HX-Trigger"] = "issue_list_updated"
-        return response
+        return htmx_message_response(
+            204,
+            "Issue successfully deleted",
+            "danger",
+            issue_list_updated=None,
+            close_modal=None,
+        )
 
 
 class IssueCreateView(LoginRequiredMixin, CreateView):
@@ -74,10 +84,16 @@ class IssueCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.project = Project.objects.get(id=self.kwargs.get("projectPK"))
         form.save()
-        response = HttpResponse()
-        response["HX-Trigger"] = "issue_list_updated"
-        return response
+        return htmx_message_response(
+            204, "Issue Created!", "success", close_modal=None, issue_list_updated=None
+        )
+
+    def get_context_data(self, **kwargs):
+        context = {"project_id": self.kwargs.get("projectPK")}
+        context["form"] = self.form_class()
+        return context
 
 
 def get_issue_count(request):
