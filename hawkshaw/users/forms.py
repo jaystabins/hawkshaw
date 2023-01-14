@@ -2,8 +2,8 @@ from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django.contrib.auth import forms as admin_forms
 from django.contrib.auth import get_user_model
-from django.utils.translation import gettext_lazy as _
 from django.forms import ModelForm
+from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
@@ -42,7 +42,12 @@ class UserSocialSignupForm(SocialSignupForm):
     See UserSignupForm otherwise.
     """
 
+
 class UserUploadImageForm(ModelForm):
+    """
+    Form the user sees when uploading a new profile or cover image form.
+    """
+
     class Meta:
         model = User
-        fields = ('avatar', 'cover_img')
+        fields = ("avatar", "cover_img")

@@ -1,10 +1,10 @@
   {% load crispy_forms_tags %}
 
   <div class="modal-header">
-    <h1 class="modal-title fs-5" id="staticBackdropLabel">New Issue</h1>
+    <h1 class="modal-title fs-5" id="staticBackdropLabel">New Project</h1>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
-  <form hx-post='{% url "issues:issue-create" project_id %}' class='form-group'>
+  <form hx-post='{% url "projects:project-add" %}' class='form-group'>
     <div class="modal-body">
         {{ form|crispy }}
     </div>

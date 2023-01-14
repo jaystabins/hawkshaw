@@ -42,7 +42,9 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="mysql://root:debug@/hawkshaw"),
+    "default": env.db(
+        "DATABASE_URL", default="mysql://root:admin@localhost:3306/hawkshaw"
+    ),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
@@ -78,8 +80,10 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    "hawkshaw.utils",
     "hawkshaw.users",
     "hawkshaw.issues",
+    "hawkshaw.projects",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
