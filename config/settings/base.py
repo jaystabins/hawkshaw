@@ -42,9 +42,7 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    "default": env.db(
-        "DATABASE_URL", default="mysql://root:admin@localhost:3306/hawkshaw"
-    ),
+    "default": env.db("DATABASE_URL", default="mysql://admin:@localhost:3306/hawkshaw"),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
